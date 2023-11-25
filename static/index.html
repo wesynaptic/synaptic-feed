@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Links List</title>
+  <script src="https://unpkg.com/htmx.org@1.4.1"></script>
+  <script src="https://unpkg.com/htmx.org@1.4.1/dist/ext/client-side-templates.js"></script>
+  <script src="https://unpkg.com/mustache@latest"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div hx-ext="client-side-templates">
+    <!-- Trigger the load automatically when the page loads -->
+    <div hx-get="/links"
+         hx-swap="outerHTML"
+         hx-trigger="load"
+         hx-target="#links-list"
+         mustache-template="links-template">
+    </div>
+
+    <div id="links-list">
+    </div>
+
+    <template id="links-template">
+        <div class="max-w-[600px] mx-auto">
+            {{# . }}
+            <p class="p-3 bg-gray-100 rounded-md  border-b-2">
+                <a href="{{ url }}" class="text-blue-500 hover:text-blue-700">
+                    {{ id }}: {{ url }}
+                </a>
+            </p>
+            {{/. }}
+        </div>
+    </template>
+
+  </div>
+</body>
+</html>
